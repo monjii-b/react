@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: #1a1a1a;
+    background: #111111;
     font-family: 'Arial', sans-serif;
     overflow-x: hidden;
     transition: transform 0.5s ease;
@@ -17,10 +17,10 @@ body {
 }
 
 .title {
-    color: #ff1100;
+    color: #800800;
     font-size: 4em;
-    margin-bottom: 50px;
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    margin-bottom: 85px;
+    text-shadow: 0 0 14px rgba(255, 0, 0, 0.5);
 }
 
 .options {
@@ -29,30 +29,54 @@ body {
 }
 
 .option {
-    background: rgba(0, 0, 0, 0.1);
-    padding: 20px 40px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    --glow-color: rgb(255, 0, 0, 0.336);
+    --glow-spread-color: rgba(255, 0, 0, 0.185);
+    --enhanced-glow-color: rgba(247, 46, 46, 0.336);
+    --btn-color: rgba(255, 0, 0, 0.185);
+    border: .25em solid var(--glow-color);
+    padding: 1em 3em;
+    color: var(--glow-color);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--btn-color);
+    border-radius: 1em;
+    outline: none;
+    box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 1em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+    text-shadow: 0 0 .5em var(--glow-color);
     position: relative;
-    overflow: hidden;
-    transform: translateY(-100%);
-    opacity: 0;
+    transition: all 0.3s;
 }
 
-.option span {
-    color: white;
-    font-size: 1.5em;
-    position: relative;
-    z-index: 2;
+/* Glow effect */
+.option::after {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 120%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--glow-spread-color);
+    filter: blur(2em);
+    opacity: .7;
+    transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
 }
-
-/* Hover Effect: Fly Out and Zoom */
+/* Hover state combining both effects */
 .option:hover {
-    transform: translateY(0) scale(1.2);
-    opacity: 1;
-    background: rgba(155, 24, 24, 0.2);
-    box-shadow: 0 0 20px rgba(155, 24, 24, 0.2);
+    color: var(--btn-color);
+    background-color: var(--glow-color);
+    box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 2em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+}
+
+/* Active state */
+.option:active {
+    box-shadow: 0 0 0.6em .25em var(--glow-color),
+            0 0 2.5em 2em var(--glow-spread-color),
+            inset 0 0 .5em .25em var(--glow-color);
 }
 
 /* Initial Animation for Options */
@@ -115,6 +139,10 @@ body {
     box-shadow: 0 0 20px rgb(255, 0, 55);
 }
 
+.menu-content p {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
 .menu-content p {
     margin: 10px 0;
     font-size: 1.2em;
