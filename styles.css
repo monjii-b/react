@@ -7,19 +7,59 @@ body {
     transition: transform 0.5s ease;
 }
 
-.container {
-    text-align: center;
-    min-height: 100vh;
+.chemical-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 600px;
     display: flex;
-    flex-direction: column;
+    gap: 10px;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    border: 1px solid #ff004c55;
+}
+
+.chemical {
+    color: #9c1796;
+    font-weight: bold;
+}
+
+.plus, .arrow {
+    color: #ff9900d5;
+    margin: 0 5px;
+}
+
+sub {
+    vertical-align: sub;
+    font-size: 0.7em;
+}
+
+.container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* Header, Content, Footer */
+    gap: 2rem;
+    align-items: stretch;
+    justify-items: stretch;
+    padding: 20px 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Add this to ensure content grows properly */
+.container > * {
+    flex-shrink: 0;
+    width: 100%;
+    /* Remove max-width: 800px */
 }
 
 .title {
     color: #800800;
     font-size: 4em;
-    margin-bottom: 85px;
+    grid-row: 1;
+    margin-bottom: 0;
     text-shadow: 0 0 14px rgba(255, 0, 0, 0.5);
 }
 
@@ -143,7 +183,117 @@ body {
     margin: 10px 0;
     font-size: 1.2em;
 }
-.menu-content p {
-    margin: 10px 0;
-    font-size: 1.2em;
+
+  
+/* احتفاظ بتحسينات الهواتف */
+@media (max-width: 768px) {
+    .chemical-box {
+        padding: 10px;
+        margin: 15px auto;
+        font-size: 0.9em;
+    }
+    .container {
+        grid-template-rows: auto 1fr;
+        padding: 10px;
+    }
+    
+    .title {
+        margin-bottom: 30px; /* Reduced space */
+    }
+    
+    .reaction-container {
+        margin: 10px 0;
+    }
+
+    .title {
+      font-size: 2.5em;
+      margin-bottom: 50px;
+    }
+    
+    .options {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .small-video-container {
+        max-height: 75vh;
+        border-width: 1px;
+    }
+
+    .option {
+      padding: 0.8em 1.5em;
+      font-size: 14px;
+    }
+    
+    .menu-content {
+      padding: 20px;
+      width: 80%;
+    }
+    .reaction-placeholder {
+        border-width: 1px;
+        box-shadow: 0 0 8px rgba(255, 0, 76, 0.3);
+    }
+    
+    video::-webkit-media-controls {
+        transform: scale(0.9); /* Better mobile controls */
+    }
+    .small-video-container {
+        max-height: 75vh;
+        border-width: 1px;
+    }
+}
+  
+  /* احتفاظ بتحسينات اللمس */
+button, .option {
+    touch-action: manipulation;
+}
+.reaction-placeholder {
+    position: visible;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    border: 1px solid #ff004c;
+    border-radius: 8px;
+    overflow: visible;
+    box-shadow: 0 0 15px rgba(255, 0, 76, 0.3);
+}
+
+video {
+    border: 1px solid #ff004c;
+    box-shadow: 0 0 15px rgba(255, 0, 76, 0.3);
+}
+
+
+.reaction-placeholder video,
+.reaction-placeholder iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.reaction-container {
+    grid-row: 2;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.small-video-container {
+    width: 100%;
+    height: 100%;
+    max-width: 1600px;
+    max-height: 90vh;
+    margin: 0 auto;
+}
+video, iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: 2px solid #ff004c;
+    box-shadow: 0 0 25px rgba(255, 0, 76, 0.4);
+    border-radius: 10px;
+    background: #000;
 }
